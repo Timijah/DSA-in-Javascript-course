@@ -63,24 +63,161 @@
 //   },
 // };
 
+// const rest1 = {
+//   name: 'Capri',
+//   numGuests: 20,
+// };
+
+// const rest2 = {
+//   name: 'La Piazza',
+//   numGuests: 'Giovanni Rossi',
+// };
+
+//OR ASSIGNMENT OPERATOR
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+//nullish assignment operator (null or undefined)
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
+
+//AND ASSIGNMENT OPERATOR
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+// rest1.owner &&= '<ANONYMOUS>';
+// rest2.owner &&= '<ANONYMOUS>';
+
+/* 
+We're building a football betting app (soccer for my American friends 😅)!
+
+Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
+
+1. Create one player array for each team (variables 'players1' and 'players2')
+2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
+3. Create an array 'allPlayers' containing all players of both teams (22 players)
+4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
+5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
+
+TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+
+GOOD LUCK 😀
+*/
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewanadowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+//1.
+const [players1, players2] = game.players;
+console.log(players1);
+console.log(players2);
+
+//2.
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+//3
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+//4
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+console.log(players1Final);
+
+//5
+// 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+
+//this is my pattern and it worked well
+// const { team1: team1, x: draw, team2: team2 } = game.odds;
+// console.log(team1, draw, team2);
+
+//this is his pattern
+
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+console.log(team1, x, team2);
+
+//6
+// 6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`${players.length} goals were scored`);
+};
+
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+printGoals(...game.scored);
+
+// 7.
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');
+
+//////////////////////////
 //SHORT CIRCUITING STARTS HERE
-//FOR THE OR OPERATOR
-console.log(3 || 'Timi');
-console.log(true || 0);
-console.log(undefined || null);
-console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+// //FOR THE OR OPERATOR
+// console.log(3 || 'Timi');
+// console.log(true || 0);
+// console.log(undefined || null);
+// console.log(undefined || 0 || '' || 'Hello' || 23 || null);
 
-restaurant.numGuests = 23;
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1);
+// restaurant.numGuests = 23;
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guests1);
 
-const guests2 = restaurant.numGuests || 10;
-console.log(guests2);
+// const guests2 = restaurant.numGuests || 10;
+// console.log(guests2);
 
-//FOR THE AND OPERATOR
-console.log(0 && 'Timi');
-console.log(7 && 'Timi');
-console.log('Timi' && 23 && null && 'Hello');
+// //FOR THE AND OPERATOR
+// console.log(0 && 'Timi');
+// console.log(7 && 'Timi');
+// console.log('Timi' && 23 && null && 'Hello');
+
+//NULLISH OPERATOR
+//Nullish: null and undefined (NOT 0 or '')
+// const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(guestCorrect);
 
 ////////////////////////////////////
 //Rest patterns and Parameters
@@ -217,4 +354,4 @@ console.log('Timi' && 23 && null && 'Hello');
 
 // // // order: function (starterIndex, mainIndex) {
 // // //     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-// // //   }
+// // //  */
