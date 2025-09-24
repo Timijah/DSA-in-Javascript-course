@@ -23,45 +23,85 @@
 // ]);
 
 // // Data needed for first part of the section
-// const restaurant = {
-//   name: 'Classico Italiano',
-//   location: 'Via Angelo Tavanti 23, Firenze, Italy',
-//   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-//   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-//   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-//   openingHours: {
-//     thu: {
-//       open: 12,
-//       close: 22,
-//     },
-//     fri: {
-//       open: 11,
-//       close: 23,
-//     },
-//     sat: {
-//       open: 0, //open 24 hours
-//       close: 24,
-//     },
-//   },
-//   order: function (starterIndex, mainIndex) {
-//     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-//   },
 
-//   orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
-//     console.log(
-//       `Your order was received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-//     );
-//   },
+//Practicing object literals now
 
-//   orderPasta: function (ing1, ing2, ing3) {
-//     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
-//   },
+const hours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, //open 24 hours
+    close: 24,
+  },
+};
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-//   orderPizza: function (mainIngredient, ...otherIngredients) {
-//     console.log(mainIngredient);
-//     console.log(otherIngredient);
-//   },
-// };
+  hours,
+
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  //   orderDelivery({ starterIndex, mainIndex, time, address }) {
+  //     console.log(
+  //       `Your order was received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+  //     );
+  //   },
+
+  //   orderPasta(ing1, ing2, ing3) {
+  //     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+  //   },
+
+  //   orderPizza(mainIngredient, ...otherIngredients) {
+  //     console.log(mainIngredient);
+  //     console.log(otherIngredient);
+  //   },
+};
+
+//THE FOR OF LOOP
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// //this gives me the elements
+// for (const item of menu) console.log(item);
+// //this gives me the indx and the element
+// for (const item of menu.entries()) {
+//   console.log(item);
+// }
+
+//OPTIONAL CHAINING STARTS HERE
+//But, I started with the logical operators
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
+
+//WITH OPTIONAL CHAINING
+// console.log(restaurant.openingHours.mon?.open); //this one checks if monday is optional(available in the method)
+console.log(restaurant.openingHours?.mon?.open); //this one checks if opening hours is optional(available in the method)
+
+//Example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  const open = restaurant.hours?.[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+//Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+//Arrays
+const users = [{ name: 'Jonas', email: 'hello@jonaas.io' }];
+console.log(users[0]?.name ?? 'User array is empty');
 
 // const rest1 = {
 //   name: 'Capri',
@@ -107,63 +147,63 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewanadowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewanadowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
 //1.
-const [players1, players2] = game.players;
-console.log(players1);
-console.log(players2);
+// const [players1, players2] = game.players;
+// console.log(players1);
+// console.log(players2);
 
-//2.
-const [gk, ...fieldPlayers] = players1;
-console.log(gk, fieldPlayers);
+// //2.
+// const [gk, ...fieldPlayers] = players1;
+// console.log(gk, fieldPlayers);
 
-//3
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+// //3
+// const allPlayers = [...players1, ...players2];
+// console.log(allPlayers);
 
-//4
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
-console.log(players1Final);
+// //4
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// console.log(players1Final);
 
 //5
 // 5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
